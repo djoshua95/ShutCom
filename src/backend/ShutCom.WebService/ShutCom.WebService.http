@@ -1,0 +1,6 @@
+@ShutCom.WebService_HostAddress = http://localhost:5084
+
+GET {{ShutCom.WebService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
