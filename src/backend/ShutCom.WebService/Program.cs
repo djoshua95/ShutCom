@@ -9,8 +9,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-var x = app.Configuration.GetValue(typeof(string), "ConnectionStrings:ShutComDB");
-Console.WriteLine(x);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
