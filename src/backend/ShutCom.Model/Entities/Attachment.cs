@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using ShutCom.Domain.Enums;
+using ShutCom.Model.Enums;
 
-namespace ShutCom.Domain.Entities;
+namespace ShutCom.Model.Entities;
 
 public class Attachment
 {

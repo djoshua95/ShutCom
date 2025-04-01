@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using ShutCom.Domain.Entities;
+using ShutCom.Model.Entities;
 
-namespace ShutCom.Domain;
+namespace ShutCom.Model;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
 {

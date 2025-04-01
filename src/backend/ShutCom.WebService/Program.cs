@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using ShutCom.Domain;
+using ShutCom.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 

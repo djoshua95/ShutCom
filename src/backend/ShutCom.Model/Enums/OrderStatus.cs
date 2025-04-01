@@ -1,4 +1,4 @@
-namespace ShutCom.Domain.Enums;
+namespace ShutCom.Model.Enums;
 
 public enum OrderStatus
 {

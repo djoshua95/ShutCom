@@ -1,4 +1,4 @@
-namespace ShutCom.Domain.Entities;
+namespace ShutCom.Model.Entities;
 
 public class ProductAttachment
 {

@@ -3,20 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ShutCom.Domain;
+using ShutCom.Model;
 
 #nullable disable
 
-namespace ShutCom.Domain.Migrations
+namespace ShutCom.Model.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250328034910_FirstMigration")]
-    partial class FirstMigration
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +22,7 @@ namespace ShutCom.Domain.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ShutCom.Domain.Entities.Attachment", b =>
+            modelBuilder.Entity("ShutCom.Model.Entities.Attachment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -59,7 +56,7 @@ namespace ShutCom.Domain.Migrations
                     b.ToTable("Attachments");
                 });
 
-            modelBuilder.Entity("ShutCom.Domain.Entities.CartItem", b =>
+            modelBuilder.Entity("ShutCom.Model.Entities.CartItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -85,7 +82,7 @@ namespace ShutCom.Domain.Migrations
                     b.ToTable("CartItems");
                 });
 
-            modelBuilder.Entity("ShutCom.Domain.Entities.Order", b =>
+            modelBuilder.Entity("ShutCom.Model.Entities.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -106,7 +103,7 @@ namespace ShutCom.Domain.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("ShutCom.Domain.Entities.OrderItem", b =>
+            modelBuilder.Entity("ShutCom.Model.Entities.OrderItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -132,7 +129,7 @@ namespace ShutCom.Domain.Migrations
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("ShutCom.Domain.Entities.Product", b =>
+            modelBuilder.Entity("ShutCom.Model.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -166,7 +163,7 @@ namespace ShutCom.Domain.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("ShutCom.Domain.Entities.ProductAttachment", b =>
+            modelBuilder.Entity("ShutCom.Model.Entities.ProductAttachment", b =>
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -181,7 +178,7 @@ namespace ShutCom.Domain.Migrations
                     b.ToTable("ProductAttachments");
                 });
 
-            modelBuilder.Entity("ShutCom.Domain.Entities.User", b =>
+            modelBuilder.Entity("ShutCom.Model.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -221,15 +218,15 @@ namespace ShutCom.Domain.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ShutCom.Domain.Entities.CartItem", b =>
+            modelBuilder.Entity("ShutCom.Model.Entities.CartItem", b =>
                 {
-                    b.HasOne("ShutCom.Domain.Entities.Product", "Product")
+                    b.HasOne("ShutCom.Model.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ShutCom.Domain.Entities.User", "User")
+                    b.HasOne("ShutCom.Model.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -240,9 +237,9 @@ namespace ShutCom.Domain.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ShutCom.Domain.Entities.Order", b =>
+            modelBuilder.Entity("ShutCom.Model.Entities.Order", b =>
                 {
-                    b.HasOne("ShutCom.Domain.Entities.User", "User")
+                    b.HasOne("ShutCom.Model.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -251,15 +248,15 @@ namespace ShutCom.Domain.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ShutCom.Domain.Entities.OrderItem", b =>
+            modelBuilder.Entity("ShutCom.Model.Entities.OrderItem", b =>
                 {
-                    b.HasOne("ShutCom.Domain.Entities.Order", "Order")
+                    b.HasOne("ShutCom.Model.Entities.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ShutCom.Domain.Entities.Product", "Product")
+                    b.HasOne("ShutCom.Model.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -270,15 +267,15 @@ namespace ShutCom.Domain.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("ShutCom.Domain.Entities.ProductAttachment", b =>
+            modelBuilder.Entity("ShutCom.Model.Entities.ProductAttachment", b =>
                 {
-                    b.HasOne("ShutCom.Domain.Entities.Attachment", "Attachment")
+                    b.HasOne("ShutCom.Model.Entities.Attachment", "Attachment")
                         .WithMany()
                         .HasForeignKey("AttachmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ShutCom.Domain.Entities.Product", "Product")
+                    b.HasOne("ShutCom.Model.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -289,7 +286,7 @@ namespace ShutCom.Domain.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("ShutCom.Domain.Entities.Order", b =>
+            modelBuilder.Entity("ShutCom.Model.Entities.Order", b =>
                 {
                     b.Navigation("OrderItems");
                 });

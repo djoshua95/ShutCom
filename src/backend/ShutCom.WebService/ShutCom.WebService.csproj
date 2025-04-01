@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ShutCom.Domain\ShutCom.Domain.csproj" />
+    <ProjectReference Include="..\ShutCom.Model\ShutCom.Model.csproj" />
   </ItemGroup>
 
 </Project>

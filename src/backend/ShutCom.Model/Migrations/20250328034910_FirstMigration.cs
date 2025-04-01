@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ShutCom.Domain.Migrations
+namespace ShutCom.Model.Migrations
 {
     /// <inheritdoc />
     public partial class FirstMigration : Migration
