@@ -34,14 +34,9 @@ public class RepositoryBase<TEntity>(DbContext dbContext) : IRepositoryBase<TEnt
         return _dbSet.Find(id);
     }
 
-    public IEnumerable<TEntity> GetAll()
+    public IQueryable<TEntity> GetAll()
     {
-        return _dbSet.ToList();
-    }
-
-    public Task<IEnumerable<TEntity>> GetAllAsync()
-    {
-        throw new NotImplementedException();
+        return _dbSet.AsNoTracking();
     }
 
     public Task<TEntity?> GetAsync(int id)
@@ -49,14 +44,9 @@ public class RepositoryBase<TEntity>(DbContext dbContext) : IRepositoryBase<TEnt
         throw new NotImplementedException();
     }
 
-    public IEnumerable<TEntity> GetFiltered(Expression<Func<TEntity, bool>> predicate)
+    public IQueryable<TEntity> GetFiltered(Expression<Func<TEntity, bool>> predicate)
     {
-        return _dbSet.Where(predicate).ToList();
-    }
-
-    public async Task<IEnumerable<TEntity>> GetFilteredAsync(Expression<Func<TEntity, bool>> predicate)
-    {
-        return await _dbSet.Where(predicate).ToListAsync();
+        return _dbSet.Where(predicate);
     }
 
     public TEntity? Save(TEntity entity)

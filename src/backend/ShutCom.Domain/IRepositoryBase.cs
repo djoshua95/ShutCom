@@ -15,14 +15,14 @@ public interface IRepositoryBase<TEntity>
     /// Retrieves all entities available in the database.
     /// </summary>
     /// <returns>A collection of entities.</returns>
-    IEnumerable<TEntity> GetAll();
+    IQueryable<TEntity> GetAll();
 
     /// <summary>
     /// Retrieves a filtered list of entities based on a predicate.
     /// </summary>
     /// <param name="predicate">The filter condition.</param>
     /// <returns>A collection of entities matching the predicate.</returns>
-    IEnumerable<TEntity> GetFiltered(Expression<Func<TEntity, bool>> predicate);
+    IQueryable<TEntity> GetFiltered(Expression<Func<TEntity, bool>> predicate);
 
     /// <summary>
     /// Saves an entity to the database.
@@ -93,19 +93,6 @@ public interface IRepositoryBase<TEntity>
     /// <param name="id">The unique identifier of the entity.</param>
     /// <returns>A task representing the asynchronous operation, containing the retrieved entity if found, <c>null</c> otherwise.</returns>
     Task<TEntity?> GetAsync(int id);
-
-    /// <summary>
-    /// Asynchronously retrieves all entities available in the database.
-    /// </summary>
-    /// <returns>A task representing the asynchronous operation, containing a collection of entities.</returns>
-    Task<IEnumerable<TEntity>> GetAllAsync();
-
-    /// <summary>
-    /// Asynchronously retrieves a filtered list of entities based on a predicate.
-    /// </summary>
-    /// <param name="predicate">The filter condition.</param>
-    /// <returns>A task representing the asynchronous operation, containing a collection of entities matching the predicate.</returns>
-    Task<IEnumerable<TEntity>> GetFilteredAsync(Expression<Func<TEntity, bool>> predicate);
 
     /// <summary>
     /// Asynchronously saves an entity to the database.
