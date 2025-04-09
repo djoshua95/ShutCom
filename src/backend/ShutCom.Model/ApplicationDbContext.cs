@@ -19,8 +19,6 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         {
             entity.Property(p => p.Price).HasPrecision(10, 2);
         });
-        modelBuilder.Entity<ProductAttachment>()
-            .HasKey(pa => new { pa.ProductId, pa.AttachmentId });
 
         modelBuilder.Entity<Product>()
             .HasMany(p => p.Attachments)

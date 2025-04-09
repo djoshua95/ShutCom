@@ -1,8 +1,10 @@
 using System.Linq.Expressions;
+using ShutCom.Model;
 
 namespace ShutCom.Domain;
 
 public interface IRepositoryBase<TEntity>
+    where TEntity : class, IEntity
 {
     /// <summary>
     /// Retrieves an entity given its unique identifier.
@@ -76,9 +78,9 @@ public interface IRepositoryBase<TEntity>
     /// <summary>
     /// Deletes multiple entities from the database in a transactional manner.
     /// </summary>
-    /// <param name="entities">The collection of entities to be deleted.</param>
+    /// <param name="ids">The collection of unique identifiers for the entities to be deleted.</param>
     /// <returns>A collection of deleted entities if successful, <c>null</c> otherwise.</returns>
-    IEnumerable<TEntity>? DeleteMultiple(IEnumerable<TEntity> entities);
+    int DeleteMultiple(IEnumerable<int> ids);
 
     /// <summary>
     /// Attempts to delete multiple entities from the database. Entities that fail will be reported.
@@ -148,7 +150,7 @@ public interface IRepositoryBase<TEntity>
     /// </summary>
     /// <param name="entities">The collection of entities to be deleted.</param>
     /// <returns>A task representing the asynchronous operation, containing a collection of deleted entities if successful, <c>null</c> otherwise.</returns>
-    Task<IEnumerable<TEntity>?> DeleteMultipleAsync(IEnumerable<TEntity> entities);
+    Task<int> DeleteMultipleAsync(IEnumerable<int> ids);
 
     /// <summary>
     /// Asynchronously attempts to delete multiple entities from the database. Entities that fail will be reported.

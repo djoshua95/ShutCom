@@ -3,7 +3,7 @@ using ShutCom.Model.Enums;
 
 namespace ShutCom.Model.Entities;
 
-public class Attachment
+public class Attachment : IEntity
 {
     [Key]
     public int Id { get; set; }

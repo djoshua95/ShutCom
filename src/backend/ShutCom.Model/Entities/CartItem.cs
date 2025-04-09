@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ShutCom.Model.Entities;
 
-public class CartItem
+public class CartItem : IEntity
 {
     [Key]
     public int Id { get; set; }

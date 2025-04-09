@@ -1,7 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace ShutCom.Model.Entities;
 
-public class ProductAttachment
+public class ProductAttachment : IEntity
 {
+    [Key]
+    public int Id { get; set; }
     public int ProductId { get; set; }
     public int AttachmentId { get; set; }
 

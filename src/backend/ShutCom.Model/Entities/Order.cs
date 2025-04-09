@@ -3,7 +3,7 @@ using ShutCom.Model.Enums;
 
 namespace ShutCom.Model.Entities;
 
-public class Order
+public class Order : IEntity
 {
     [Key]
     public int Id { get; set; }
