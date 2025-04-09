@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using ShutCom.Domain.Enums;
 using ShutCom.Model;
 
-namespace ShutCom.Domain;
+namespace ShutCom.Domain.Repository;
 
 public class RepositoryBase<TEntity>(DbContext dbContext) : IRepositoryBase<TEntity>
     where TEntity : class, IEntity

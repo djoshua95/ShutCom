@@ -1,6 +1,6 @@
 using ShutCom.Domain.Enums;
 
-namespace ShutCom.Domain;
+namespace ShutCom.Domain.Repository;
 
 public class NonTransactionalResult<TEntity>
 {

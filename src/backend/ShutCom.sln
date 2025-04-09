@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShutCom.Model", "ShutCom.Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShutCom.Domain", "ShutCom.Domain\ShutCom.Domain.csproj", "{C4C273FA-E221-4874-B5C6-F83F11ADA711}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MysticMadness.Service", "MysticMadness.Service\MysticMadness.Service.csproj", "{C9C44488-D571-4722-8A7D-7F8A6A49A9BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{C4C273FA-E221-4874-B5C6-F83F11ADA711}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4C273FA-E221-4874-B5C6-F83F11ADA711}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4C273FA-E221-4874-B5C6-F83F11ADA711}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9C44488-D571-4722-8A7D-7F8A6A49A9BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9C44488-D571-4722-8A7D-7F8A6A49A9BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9C44488-D571-4722-8A7D-7F8A6A49A9BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9C44488-D571-4722-8A7D-7F8A6A49A9BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

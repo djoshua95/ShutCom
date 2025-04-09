@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using ShutCom.Model;
 
-namespace ShutCom.Domain;
+namespace ShutCom.Domain.Repository;
 
 public interface IRepositoryBase<TEntity>
     where TEntity : class, IEntity
