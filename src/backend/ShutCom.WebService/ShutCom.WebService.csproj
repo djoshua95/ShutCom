@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ShutCom.Model\ShutCom.Model.csproj" />
+    <ProjectReference Include="..\MysticMadness.Service\MysticMadness.Service.csproj" />
   </ItemGroup>
 
 </Project>

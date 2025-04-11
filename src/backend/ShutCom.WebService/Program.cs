@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MysticMadness.Service;
 using ShutCom.Model;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddServices();
 
 var app = builder.Build();
 

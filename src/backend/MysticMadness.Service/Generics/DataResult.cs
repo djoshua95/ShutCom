@@ -1,4 +1,4 @@
-namespace MysticMadness.Service;
+namespace MysticMadness.Service.Generics;
 
 public class DataResult<TResult>
 {

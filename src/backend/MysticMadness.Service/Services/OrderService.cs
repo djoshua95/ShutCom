@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using MysticMadness.Service.Generics;
 using ShutCom.Domain.UnitOfWorkPattern;
 using ShutCom.Model.Entities;
 
 namespace MysticMadness.Service.Services;
 
-public class OrderService(IUnitOfWork unitOfWork)
+public class OrderService(IUnitOfWork unitOfWork) : IOrderService
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
