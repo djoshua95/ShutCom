@@ -1,0 +1,25 @@
+namespace MysticMadness.Service.AppConstants;
+
+public static class Constants
+{
+    /// <summary>
+    /// These constants are for custom logging messages when an exception is captured.
+    /// </summary>
+    public static class LoggingMessages
+    {
+        public const string ERROR_FAILED_GET_ORDER_FOR_USER = "Failed to retrieve orders for user {UserId}. Error code: {ErrorCode}";
+    }
+
+    /// <summary>
+    /// These constants are for retrieving messages to the client.
+    /// </summary>
+    public static class ErrorMessages
+    {
+        public const string ERROR_GET_ITEMS_FAILED = "The operation failed, no items could be fetched.";
+    }
+
+    public static class ErrorCodes
+    {
+        public const string ORDS0001 = "Error code: ORDS0001";
+    }
+}

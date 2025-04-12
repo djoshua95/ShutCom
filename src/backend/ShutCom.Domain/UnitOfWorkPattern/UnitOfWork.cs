@@ -1,12 +1,12 @@
-using Microsoft.EntityFrameworkCore;
 using ShutCom.Domain.Repository;
+using ShutCom.Model;
 using ShutCom.Model.Entities;
 
 namespace ShutCom.Domain.UnitOfWorkPattern;
 
-public class UnitOfWork(DbContext dbContext) : IUnitOfWork
+public class UnitOfWork(ApplicationDbContext dbContext) : IUnitOfWork
 {
-    private readonly DbContext _dbContext = dbContext;
+    private readonly ApplicationDbContext _dbContext = dbContext;
     private IRepositoryBase<Attachment>? _attachmentRepository;
     public IRepositoryBase<Attachment> AttachmentRepository
     {

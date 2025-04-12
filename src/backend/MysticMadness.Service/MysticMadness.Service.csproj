@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ShutCom.Domain\ShutCom.Domain.csproj" />
+    <ProjectReference Include="..\MysticMadness.Dto\MysticMadness.Dto.csproj" />
   </ItemGroup>
 
 </Project>

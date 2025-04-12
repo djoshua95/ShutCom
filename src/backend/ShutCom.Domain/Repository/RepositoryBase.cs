@@ -6,7 +6,7 @@ using ShutCom.Model;
 
 namespace ShutCom.Domain.Repository;
 
-public class RepositoryBase<TEntity>(DbContext dbContext) : IRepositoryBase<TEntity>
+public class RepositoryBase<TEntity>(ApplicationDbContext dbContext) : IRepositoryBase<TEntity>
     where TEntity : class, IEntity
 {
     private readonly DbContext _dbContext = dbContext;
