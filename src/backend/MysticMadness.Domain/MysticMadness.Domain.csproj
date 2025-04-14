@@ -7,12 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MysticMadness.Domain\MysticMadness.Domain.csproj" />
-    <ProjectReference Include="..\MysticMadness.Dto\MysticMadness.Dto.csproj" />
+    <ProjectReference Include="..\MysticMadness.Model\MysticMadness.Model.csproj" />
   </ItemGroup>
 
 </Project>

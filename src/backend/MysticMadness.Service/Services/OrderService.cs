@@ -6,7 +6,7 @@ using MysticMadness.Service.AppConstants;
 using MysticMadness.Service.Generics;
 using MysticMadness.Service.Utils;
 using MysticMadness.Service.Utils.Logging;
-using ShutCom.Domain.UnitOfWorkPattern;
+using MysticMadness.Domain.UnitOfWorkPattern;
 
 namespace MysticMadness.Service.Services;
 

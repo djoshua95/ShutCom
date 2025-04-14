@@ -1,6 +1,6 @@
 using AutoMapper;
 using MysticMadness.Dto;
-using ShutCom.Model.Entities;
+using MysticMadness.Model.Entities;
 
 namespace MysticMadness.Service.Mapping;
 

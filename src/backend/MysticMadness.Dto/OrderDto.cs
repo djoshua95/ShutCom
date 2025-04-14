@@ -1,4 +1,4 @@
-using ShutCom.Model.Enums;
+using MysticMadness.Model.Enums;
 
 namespace MysticMadness.Dto;
 

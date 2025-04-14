@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\ShutCom.Model\ShutCom.Model.csproj" />
+    <ProjectReference Include="..\MysticMadness.Model\MysticMadness.Model.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

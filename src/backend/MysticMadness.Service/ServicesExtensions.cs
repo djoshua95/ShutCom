@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using MysticMadness.Service.Services;
-using ShutCom.Domain.Repository;
-using ShutCom.Domain.UnitOfWorkPattern;
+using MysticMadness.Domain.Repository;
+using MysticMadness.Domain.UnitOfWorkPattern;
 
 namespace MysticMadness.Service;
 

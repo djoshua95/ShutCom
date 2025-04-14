@@ -1,2 +1,3 @@
-# ShutCom
-proyecto pagina web
+# MysticMadness
+
+Website project for the online store MysticMadness
