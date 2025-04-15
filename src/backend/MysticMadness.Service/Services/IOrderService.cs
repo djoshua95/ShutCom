@@ -6,4 +6,7 @@ namespace MysticMadness.Service.Services;
 public interface IOrderService
 {
     Task<DataResult<List<OrderDto>>> GetAllOrdersGivenAnUserIdAsync(int userId);
+
+    Task<DataResult<PagedResult<OrderDto>>> GetPagedOrdersGivenAnUserIdAsync(PagedOrderRequest request);
+
 }
