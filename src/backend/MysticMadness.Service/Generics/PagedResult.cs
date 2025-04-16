@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-
 namespace MysticMadness.Service.Generics;
 
 public class PagedResult<TResult>
@@ -37,15 +35,5 @@ public class PagedResult<TResult>
         return PAGE_SIZE_DEFAULT_VALUE;
     }
 
-    private PagedResult() { }
-
-    public static async Task<PagedResult<TResult>> BuildFromQuery(IQueryable<TResult> source, int pageSize, int pageNumber)
-    {
-        PagedResult<TResult> result = new() { PageSize = pageSize, PageNumber = pageNumber, TotalItems = await source.CountAsync() };
-        result.Items = await source
-            .Skip(result.PageSize * (result.PageNumber - 1))
-            .Take(result.PageSize)
-            .ToListAsync();
-        return result;
-    }
+    internal PagedResult() { }
 }

@@ -8,6 +8,7 @@ public static class Constants
     public static class LoggingMessages
     {
         public const string ERROR_FAILED_GET_ORDER_FOR_USER = "Failed to retrieve orders for user {UserId}. Error code: {ErrorCode}";
+        public const string ERROR_FAILED_GET_PAGED_ORDERS_FOR_USER = "Failed to retrieve orders for user {UserId}. Error code: {ErrorCode}";
     }
 
     /// <summary>
@@ -21,5 +22,6 @@ public static class Constants
     public static class ErrorCodes
     {
         public const string ORDS0001 = "Error code: ORDS0001";
+        public const string ORDS0002 = "Error code: ORDS0002";
     }
 }

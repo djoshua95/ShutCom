@@ -29,4 +29,17 @@ public static class CustomLoggingMessages
             return new() { Template = TEMPLATE, Code = CODE, Exception = Ex, Params = [UserId.ToString(), CODE] };
         }
     }
+
+    public class ORDS0002 : ICustomLoggingMessage
+    {
+        public const string TEMPLATE = Constants.LoggingMessages.ERROR_FAILED_GET_ORDER_FOR_USER;
+        public const string CODE = nameof(ORDS0002);
+        public required Exception Ex { get; set; }
+        public required int UserId { get; set; }
+
+        public GenericLoggingError GetError()
+        {
+            return new() { Template = TEMPLATE, Code = CODE, Exception = Ex, Params = [UserId.ToString(), CODE] };
+        }
+    }
 }

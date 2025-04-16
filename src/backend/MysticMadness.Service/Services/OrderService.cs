@@ -2,20 +2,28 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MysticMadness.Dto;
+using MysticMadness.Dto.Filters;
 using MysticMadness.Service.AppConstants;
+using MysticMadness.Service.Factories;
 using MysticMadness.Service.Generics;
 using MysticMadness.Service.Utils;
 using MysticMadness.Service.Utils.Logging;
 using MysticMadness.Domain.UnitOfWorkPattern;
 
-
 namespace MysticMadness.Service.Services;
 
-public class OrderService(IUnitOfWork unitOfWork, ILogger<OrderService> logger, IMapper mapper) : IOrderService
+public class OrderService
+(
+    IUnitOfWork unitOfWork,
+    ILogger<OrderService> logger,
+    IMapper mapper,
+    IPagedResultFactory pagedResultFactory
+) : IOrderService
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
     private readonly ILogger<OrderService> _logger = logger;
     private readonly IMapper _mapper = mapper;
+    private readonly IPagedResultFactory _pagedResultFactory = pagedResultFactory;
 
     public async Task<DataResult<List<OrderDto>>> GetAllOrdersGivenAnUserIdAsync(int userId)
     {
@@ -42,44 +50,33 @@ public class OrderService(IUnitOfWork unitOfWork, ILogger<OrderService> logger, 
     }
 
 
-    public async Task<DataResult<PagedResult<OrderDto>>> GetPagedOrdersGivenAnUserIdAsync(PagedOrderRequest request)
+    public async Task<DataResult<PagedResult<OrderDto>>> GetPagedOrdersGivenAnUserIdAsync(OrderFilterDto filter)
     {
-        // Inicializamos el objeto DataResult que encapsulará el resultado final
-        DataResult<List<OrderDto>> dataResult = new DataResult<List<OrderDto>>
-        {
-            Success = false,
-            Message = "No se pudieron recuperar los pedidos paginados"
-        };
+        DataResult<PagedResult<OrderDto>> dataResult = new() { Success = false };
 
         try
         {
-            var orders = await _unitOfWork.OrderRepository
-                .GetFiltered(o => o.UserId == request.UserId)
-                .ToListAsync();
+            var orders = _unitOfWork.OrderRepository
+                .GetFiltered(o =>
+                    o.UserId == filter.UserId
+                    && (filter.Status == null || o.Status == filter.Status)
+                );
 
-            var page = request.Page <= 0 ? 1 : request.Page;
-            var pageSize = request.PageSize <= 0 ? 10 : request.PageSize;
+            var pagedDtos = await _pagedResultFactory
+                .Create(orders, filter.PageSize, filter.PageNumber)
+                .WithMapping<OrderDto>()
+                .BuildAsync();
 
-            var skip = (page - 1) * pageSize;
-
-            var pagedOrders = orders
-                .Skip(skip)
-                .Take(pageSize)
-                .ToList();
-
-            var ordersDto = _mapper.Map<List<OrderDto>>(pagedOrders);
-
-            dataResult.Data = ordersDto;
+            dataResult.Data = pagedDtos;
             dataResult.Success = true;
-            dataResult.Message = "Pedidos paginados recuperados con éxito";
-
-            //var totalCount = orders.Count();
-            //dataResult. = totalCount;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error al recuperar los pedidos paginados");
-            dataResult.Message = "Error al recuperar los pedidos paginados";
+            _logger.CustomLogError(new CustomLoggingMessages.ORDS0002 { Ex = ex, UserId = filter.UserId });
+            dataResult.Message = ErrorMessageBuilder.BuildFromMessageAndCode(
+                Constants.ErrorMessages.ERROR_GET_ITEMS_FAILED,
+                Constants.ErrorCodes.ORDS0002
+            );
         }
 
         return dataResult;
