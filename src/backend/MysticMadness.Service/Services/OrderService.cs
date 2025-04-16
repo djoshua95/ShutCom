@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using MysticMadness.Dto;
 using MysticMadness.Dto.Filters;
 using MysticMadness.Service.AppConstants;
-using MysticMadness.Service.Factories;
+using MysticMadness.Service.Factories.PagedResult;
 using MysticMadness.Service.Generics;
 using MysticMadness.Service.Utils;
 using MysticMadness.Service.Utils.Logging;

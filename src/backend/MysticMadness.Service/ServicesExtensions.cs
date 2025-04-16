@@ -1,5 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
-using MysticMadness.Service.Factories;
+using MysticMadness.Service.Factories.PagedResult;
 using MysticMadness.Service.Services;
 using MysticMadness.Domain.Repository;
 using MysticMadness.Domain.UnitOfWorkPattern;

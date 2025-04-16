@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using MysticMadness.Service.Generics;
+using MysticMadness.Service.Utils;
 
 namespace MysticMadness.Service.Factories.PagedResult;
 
@@ -22,21 +23,10 @@ public class PagedResultBuilder<TEntity>
     private IQueryable<TEntity> _query = source;
     public IPagedResultBuilder<TEntity> WithSorting(params OrderByOptions<TEntity>[] keySelectors)
     {
-        if (keySelectors.Any())
-        {
-            var currentQuery = keySelectors.First().Descending
-                ? _query.OrderByDescending(keySelectors.First().Selector)
-                : _query.OrderBy(keySelectors.First().Selector);
-            foreach (var keySelector in keySelectors[1..])
-            {
-                currentQuery = keySelector.Descending
-                    ? currentQuery.ThenByDescending(keySelector.Selector)
-                    : currentQuery.ThenBy(keySelector.Selector);
-            }
-            _query = currentQuery;
-        }
+        _query = _query.ApplySorting(keySelectors);
         return this;
     }
+
     public IMappedPagedResultBuilder<TEntity, TDto> WithMapping<TDto>()
     {
         return new MappedPagedResultBuilder<TEntity, TDto>(mapper, _query, pageSize, pageNumber);
@@ -44,11 +34,12 @@ public class PagedResultBuilder<TEntity>
 
     public async Task<PagedResult<TEntity>> BuildAsync()
     {
-        PagedResult<TEntity> result = new() { TotalItems = await _query.CountAsync(), PageSize = pageSize, PageNumber = pageNumber };
-        result.Items = await _query
-            .Skip(result.PageSize * (result.PageNumber - 1))
-            .Take(result.PageSize)
-            .ToListAsync();
-        return result;
+        return new()
+        {
+            TotalItems = await _query.CountAsync(),
+            PageSize = pageSize,
+            PageNumber = pageNumber,
+            Items = await PagingHelper.ApplyPagingAsync(_query, pageSize, pageNumber)
+        };
     }
 }

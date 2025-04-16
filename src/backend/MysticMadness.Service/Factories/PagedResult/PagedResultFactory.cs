@@ -1,7 +1,6 @@
 using AutoMapper;
-using MysticMadness.Service.Factories.PagedResult;
 
-namespace MysticMadness.Service.Factories;
+namespace MysticMadness.Service.Factories.PagedResult;
 
 public interface IPagedResultFactory
 {

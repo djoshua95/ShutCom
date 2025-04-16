@@ -19,7 +19,7 @@ public static class CustomLoggingMessages
 {
     public class ORDS0001 : ICustomLoggingMessage
     {
-        public const string TEMPLATE = Constants.LoggingMessages.ERROR_FAILED_GET_ORDER_FOR_USER;
+        public const string TEMPLATE = Constants.LoggingMessages.ERROR_FAILED_GET_ORDERS_FOR_USER;
         public const string CODE = nameof(ORDS0001);
         public required Exception Ex { get; set; }
         public required int UserId { get; set; }
@@ -32,7 +32,7 @@ public static class CustomLoggingMessages
 
     public class ORDS0002 : ICustomLoggingMessage
     {
-        public const string TEMPLATE = Constants.LoggingMessages.ERROR_FAILED_GET_ORDER_FOR_USER;
+        public const string TEMPLATE = Constants.LoggingMessages.ERROR_FAILED_GET_ORDERS_FOR_USER;
         public const string CODE = nameof(ORDS0002);
         public required Exception Ex { get; set; }
         public required int UserId { get; set; }

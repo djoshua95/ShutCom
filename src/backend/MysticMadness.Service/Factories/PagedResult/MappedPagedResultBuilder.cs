@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using MysticMadness.Service.Generics;
+using MysticMadness.Service.Utils;
 
 namespace MysticMadness.Service.Factories.PagedResult;
 
@@ -22,29 +23,14 @@ public class MappedPagedResultBuilder<TEntity, TDto>
 
     public IMappedPagedResultBuilder<TEntity, TDto> WithSorting(params OrderByOptions<TEntity>[] keySelectors)
     {
-        if (keySelectors.Any())
-        {
-            var currentQuery = keySelectors.First().Descending
-                ? _query.OrderByDescending(keySelectors.First().Selector)
-                : _query.OrderBy(keySelectors.First().Selector);
-            foreach (var keySelector in keySelectors[1..])
-            {
-                currentQuery = keySelector.Descending
-                    ? currentQuery.ThenByDescending(keySelector.Selector)
-                    : currentQuery.ThenBy(keySelector.Selector);
-            }
-            _query = currentQuery;
-        }
+        _query = _query.ApplySorting(keySelectors);
         return this;
     }
 
     public async Task<PagedResult<TDto>> BuildAsync()
     {
         PagedResult<TDto> result = new() { TotalItems = await _query.CountAsync(), PageSize = pageSize, PageNumber = pageNumber };
-        var items = await _query
-            .Skip(result.PageSize * (result.PageNumber - 1))
-            .Take(result.PageSize)
-            .ToListAsync();
+        var items = await PagingHelper.ApplyPagingAsync(_query, pageSize, pageNumber);
         result.Items = mapper.Map<List<TDto>>(items);
         return result;
     }

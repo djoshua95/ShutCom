@@ -7,8 +7,10 @@ public static class Constants
     /// </summary>
     public static class LoggingMessages
     {
-        public const string ERROR_FAILED_GET_ORDER_FOR_USER = "Failed to retrieve orders for user {UserId}. Error code: {ErrorCode}";
+        public const string ERROR_FAILED_GET_ORDERS_FOR_USER = "Failed to retrieve orders for user {UserId}. Error code: {ErrorCode}";
         public const string ERROR_FAILED_GET_PAGED_ORDERS_FOR_USER = "Failed to retrieve orders for user {UserId}. Error code: {ErrorCode}";
+        public const string ERROR_INVALID_PAGE_SIZE = "Page size must be greater than or equal to 1.";
+        public const string ERROR_INVALID_PAGE_NUMBER = "Page number must be greater than or equal to 1.";
     }
 
     /// <summary>
