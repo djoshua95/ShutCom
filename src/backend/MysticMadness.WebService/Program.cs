@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MysticMadness.Service;
 using MysticMadness.Service.Mapping;
 using MysticMadness.Model;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,13 @@ builder.Services.AddSwaggerGen();
 // Invoke custom extension methods
 builder.Services.AddServices();
 builder.Services.AddMapping();
+
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
 
 var app = builder.Build();
 

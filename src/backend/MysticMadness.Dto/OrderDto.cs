@@ -9,6 +9,5 @@ public class OrderDto
     public OrderStatus Status { get; set; }
 
     // navigation properties
-    public UserDto User { get; set; } = null!;
     public List<OrderItemDto> OrderItems { get; set; } = [];
 }

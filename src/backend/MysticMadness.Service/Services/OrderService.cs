@@ -60,7 +60,9 @@ public class OrderService
                 .GetFiltered(o =>
                     o.UserId == filter.UserId
                     && (filter.Status == null || o.Status == filter.Status)
-                );
+                )
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Product);
 
             var pagedDtos = await _pagedResultFactory
                 .Create(orders, filter.PageSize, filter.PageNumber)

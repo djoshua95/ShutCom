@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MysticMadness.Dto.Filters;
 using MysticMadness.Service.Services;
 
 namespace MysticMadness.WebService.Controllers;
@@ -13,6 +14,14 @@ public class OrderController(IOrderService orderService) : ControllerBase
     public async Task<IActionResult> Get(int userId)
     {
         var result = await _orderService.GetAllOrdersGivenAnUserIdAsync(userId);
+        if (result.Success) return Ok(result);
+        return BadRequest(result);
+    }
+
+    [HttpGet("paged")]
+    public async Task<IActionResult> GetPaged([FromQuery] OrderFilterDto filter)
+    {
+        var result = await _orderService.GetPagedOrdersGivenAnUserIdAsync(filter);
         if (result.Success) return Ok(result);
         return BadRequest(result);
     }

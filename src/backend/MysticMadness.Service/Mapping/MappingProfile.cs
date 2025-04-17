@@ -9,5 +9,10 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<Order, OrderDto>().ReverseMap();
+        CreateMap<OrderItem, OrderItemDto>().ReverseMap();
+        CreateMap<User, UserDto>().ReverseMap();
+        CreateMap<Product, ProductDto>()
+            .ForMember(p => p.Stock, dto => dto.MapFrom(x => x.Stock > 0 ))
+            .ReverseMap();
     }
 }
