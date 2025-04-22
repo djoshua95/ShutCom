@@ -1,0 +1,22 @@
+services:
+  database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql_db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=yourStrongPassword?
+    ports:
+      - "1433:1433"
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: MysticMadness-backend-dev
+    restart: unless-stopped
+    ports:
+      - "5050:5050"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5050
+    depends_on:
+      - database
