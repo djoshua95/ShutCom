@@ -1,8 +1,10 @@
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
+using MysticMadness.Model;
 using MysticMadness.Service;
 using MysticMadness.Service.Mapping;
-using MysticMadness.Model;
-using System.Text.Json.Serialization;
+using MysticMadness.WebService.Auth;
+using MysticMadness.WebService.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddServices();
 builder.Services.AddMapping();
 
+// Auth
+builder.Services.AddAuth(builder.Configuration);
+
+// Configure JSON loops handling
 builder.Services
     .AddControllers()
     .AddJsonOptions(options =>
@@ -27,10 +33,17 @@ builder.Services
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     });
 
+// Configure swagger in dev environments
+List<string> devEnvironments = ["Development", "Docker"];
+if (devEnvironments.Contains(builder.Environment.EnvironmentName))
+{
+    builder.Services.ConfigureSwagger(builder.Configuration);
+}
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (devEnvironments.Contains(app.Environment.EnvironmentName))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -38,6 +51,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

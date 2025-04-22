@@ -1,5 +1,10 @@
 services:
   database:
+    healthcheck:
+      test: [ "CMD", "/opt/mssql-tools18/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "yourStrongPassword?", "-Q", "SELECT 1", "-C" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: mssql_db
     environment:
@@ -7,6 +12,23 @@ services:
       - MSSQL_SA_PASSWORD=yourStrongPassword?
     ports:
       - "1433:1433"
+    networks:
+      - app-network
+  migrator:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: build
+    environment:
+      - PATH=/root/.dotnet/tools:$PATH
+      - ASPNETCORE_ENVIRONMENT=Docker
+    working_dir: /app
+    entrypoint: [ "dotnet", "ef", "database", "update", "--startup-project", "MysticMadness.WebService", "--project", "MysticMadness.Model" ]
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - app-network
   backend:
     build:
       context: ./backend
@@ -16,7 +38,14 @@ services:
     ports:
       - "5050:5050"
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:5050
     depends_on:
-      - database
+      migrator:
+        condition: service_completed_successfully
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
