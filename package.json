@@ -1,0 +1,12 @@
+{
+  "name": "mystic-madness",
+  "version": "1.0.0",
+  "description": "E-commerce",
+  "scripts": {
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.8.0"
+}

@@ -1,0 +1,2 @@
+pnpm dlx prettier --write "src/frontend/**/*.{ts,tsx}"
+dotnet format "src/backend/MysticMadness.sln"
