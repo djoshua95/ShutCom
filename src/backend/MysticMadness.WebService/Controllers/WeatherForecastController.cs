@@ -7,7 +7,16 @@ namespace MysticMadness.WebService.Controllers;
 public class WeatherForecastController : ControllerBase
 {
     private static readonly List<string> Summaries = [
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        "Freezing",
+        "Bracing",
+        "Chilly",
+        "Cool",
+        "Mild",
+        "Warm",
+        "Balmy",
+        "Hot",
+        "Sweltering",
+        "Scorching"
     ];
 
     private readonly ILogger<WeatherForecastController> _logger;

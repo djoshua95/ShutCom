@@ -12,7 +12,7 @@ public class MappingProfile : Profile
         CreateMap<OrderItem, OrderItemDto>().ReverseMap();
         CreateMap<User, UserDto>().ReverseMap();
         CreateMap<Product, ProductDto>()
-            .ForMember(p => p.Stock, dto => dto.MapFrom(x => x.Stock > 0 ))
+            .ForMember(p => p.Stock, dto => dto.MapFrom(x => x.Stock > 0))
             .ReverseMap();
     }
 }

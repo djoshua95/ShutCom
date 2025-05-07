@@ -1,0 +1,13 @@
+.auth_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.auth_paper {
+    width: 100%;
+    max-width: 400px;
+}
