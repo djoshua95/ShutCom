@@ -1,6 +1,19 @@
 root = true
 
-[*.cs]
+# Default settings for all files
+[*]
 end_of_line = lf
 charset = utf-8
 insert_final_newline = true
+
+# Normal C# files
+[*.cs]
+# Your normal C# formatting rules here
+indent_style = space
+indent_size = 4
+# etc.
+
+# Migration files only
+[**/Migrations/**.cs]
+generated_code = true
+dotnet_analyzer_diagnostic.severity = none

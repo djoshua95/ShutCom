@@ -1,20 +1,16 @@
 #!/usr/bin/env sh
 # .husky/pre-commit
 
-# Get list of staged files
+# Format and stage frontend files
 frontend_files=$(git diff --cached --name-only --diff-filter=ACM | grep -E 'src/frontend/.*\.(ts|tsx)$' || true)
-backend_files=$(git diff --cached --name-only --diff-filter=ACM | grep -E 'src/backend/.*\.(cs|csproj)$' || true)
-
-# Format staged frontend files if any
 if [ -n "$frontend_files" ]; then
-  echo "Formatting frontend files..."
   pnpm dlx prettier --write $frontend_files
   git add $frontend_files
 fi
 
-# Format staged backend files if any
+# Format and stage backend files
+backend_files=$(git diff --cached --name-only --diff-filter=ACM | grep -E 'src/backend/.*\.(cs|csproj)$' || true)
 if [ -n "$backend_files" ]; then
-  echo "Formatting backend files..."
   dotnet format "src/backend/MysticMadness.sln" --include $backend_files
   git add $backend_files
 fi
